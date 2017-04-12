@@ -12,6 +12,17 @@
 
 
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js">
+
+        <script>
+        $(document).ready(function(){
+        $('Name').find('p:contains("R")').css('background-color','red');
+        $('Name').find('p:contains("D")').css('background-color','blue');
+        $('Name').find('p:contains("I")').css('background-color','green');
+        });
+    </script>
+
 </head>
 
 
@@ -27,8 +38,9 @@
     <button ng-click="updateReps()">Find Rep</button>
 
 
+
     <div ng-repeat="representative in representatives" class="row">
-        <div ng-repeat="results in representative.results" class="col-sm-6 col-md-4">
+        <div id = "Name" ng-repeat="results in representative.results" class="col-sm-6 col-md-4" ng-style="'{{results.party}}' === 'R' && {'background-color': 'red'} || '{{results.party}}' === 'D' && {'background-color': 'blue'} || '{{results.party}}' === 'I' && {'background-color': 'green'}" >
             <div class="thumbnail">
                 <img src="Seal_of_the_United_States_Congress.svg.png" width="80" height="80" alt="Your Congressional Representative">
                 <div class="caption">

@@ -100,7 +100,6 @@
         $scope.updateReps= function(){
              //alert('findRep vcalled');
              $http.get("https://congress.api.sunlightfoundation.com/legislators/locate?zip=" + $scope.userZip)
-             $http
             .then(function(response){
                 $scope.representatives = response;
             });

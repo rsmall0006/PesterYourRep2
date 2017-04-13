@@ -1,0 +1,9 @@
+.row .col-md-12 .thumbnail{
+    display: inline-block;
+    width: 350px;
+    position:relative;
+}
+img {
+    max-height: 100%;
+    max-width: 100%;
+}

@@ -1,8 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ProjectModuleManager">
+
+    user.name = user;
+    user.email = email;
+    user.password = password;
+    user.homeaddress = homeAddress;
+    user.zipcode = zipcode;
+    user.partyaffiliation = partyaffiliation;
+
+    public user (){}
+
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/PesterYourRep2.iml" filepath="$PROJECT_DIR$/.idea/PesterYourRep2.iml" />
+
+    your stack overflow flow the hashmaps
+
+
+    </modules>
+
+
+
+
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/PesterYourRep2.iml" filepath="$PROJECT_DIR$/PesterYourRep2.iml" />
     </modules>
   </component>
 </project>

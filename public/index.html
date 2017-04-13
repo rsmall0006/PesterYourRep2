@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Pester Your Rep Project</title>
 
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -12,6 +12,8 @@
 
 
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
 </head>
 
 
@@ -21,17 +23,18 @@
 
 
 
-
-
     Enter your Zip Code <input type="text" ng-model="userZip">
     <button ng-click="updateReps()">Find Rep</button>
 
 
     <div ng-repeat="representative in representatives" class="row">
-        <div ng-repeat="results in representative.results" class="col-sm-6 col-md-4">
-            <div class="thumbnail">
-                <img src="Seal_of_the_United_States_Congress.svg.png" width="80" height="80" alt="Your Congressional Representative">
-                <div class="caption">
+            <div id = "Name" ng-repeat="results in representative.results" class="col-sm-6 col-md-4" ng-style="'{{results.party}}' === 'R' && {'background-color': 'red'} || '{{results.party}}' === 'D' && {'background-color': 'blue'} || '{{results.party}}' === 'I' && {'background-color': 'green'}" >
+
+                  <div class="thumbnail">
+                    <!--<img ng-src="{{results.party == 'D' && 'images/DemocraticLogo.png' || results.party == 'R' && 'images/Republicanlogo.png' || results.party == 'I' && 'images/IndependentLogo.png'}}" width="100" height="50px" alt="Your Congressional Representative"/>-->
+                <img ng=-src="public/images2/{{results.bioguide_id}}.jpg"/>
+
+                      <div class="caption">
                     <h3>{{"Name:" + " " + results.first_name + " " + results.last_name}}</h3>
                     <p>{{"Email:" + " " + results.oc_email}}</p>
                     <p>{{"Phone:" + " " + results.phone}}</p>
@@ -41,8 +44,14 @@
         </div>
     </div>
     </div>
+</div>
 
-
+    <!--<tr ng-repeat="representative in representatives">-->
+        <!--<td>{{".title}}</td>-->
+        <!--<td>{{data.description}}</td>-->
+        <!--...-->
+        <!--<td class="status" ng-class="{ 'available': data.status=='string1', 'taken': data.status!='string1'}"></td>-->
+    <!--</tr>-->
 
 
 

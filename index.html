@@ -34,7 +34,7 @@
 
 
 
-    Enter Zip Code of Representatives<input type="text" ng-model="userZip">
+    Enter Zip Code of Representatives <input type="text" ng-model="userZip">
     <button ng-click="updateReps()">Find Rep</button>
     <!--<button ng-click="getLocation()">Find Your Location</button>-->
 
@@ -60,9 +60,10 @@
                 <div class="caption">
                     <!--<h3>{{"Name:" + " " + results.first_name + " " + results.last_name}}</h3>-->
                     <h3>{{results.first_name + " " + results.last_name}}</h3>
+                    <p>{{"State:" + " " + results.state_name}}</p>
+                    <p>{{"Website:" + " " + results.website}}</p>
                     <p>{{"Email:" + " " + results.oc_email}}</p>
                     <p>{{"Phone:" + " " + results.phone}}</p>
-                    <p>{{"State:" + " " + results.state_name}}</p>
                     <!--<p>{{"Political Party:" + " " + results.party}}</p>-->
                     <p ng-if ="results.party === 'D'">Political Party: Democrat</p>
                     <p ng-if="results.party === 'R'">Political Party: Republican</p>

@@ -58,12 +58,19 @@
                 <img ng-src="public/images2/{{results.bioguide_id}}.jpg"/>
 
                 <div class="caption">
-                    <h3>{{"Name:" + " " + results.first_name + " " + results.last_name}}</h3>
+                    <!--<h3>{{"Name:" + " " + results.first_name + " " + results.last_name}}</h3>-->
+                    <h3>{{results.first_name + " " + results.last_name}}</h3>
                     <p>{{"Email:" + " " + results.oc_email}}</p>
                     <p>{{"Phone:" + " " + results.phone}}</p>
                     <p>{{"State:" + " " + results.state_name}}</p>
-                    <p>{{"Political Party:" + " " + results.party}}</p>
-                    <p>{{"Chamber:" + " " + results.chamber}}</p>
+                    <!--<p>{{"Political Party:" + " " + results.party}}</p>-->
+                    <p ng-if ="results.party === 'D'">Political Party: Democrat</p>
+                    <p ng-if="results.party === 'R'">Political Party: Republican</p>
+                    <p ng-if="results.party === 'I'">Political Party: Independent</p>
+                    <!--<p>{{"Political Party:" + " " + results.party === 'D' && '{{results.party}}emocrat' || results.party === 'R' && '{{results.party}}epublican' || results.party === 'I' && '{{results.party}}ndependent' }}</p>-->
+                    <!--<p>{{"Chamber:" + " " + results.chamber}}</p>-->
+                    <p ng-if ="results.chamber === 'house'">Chamber: House of Representatives</p>
+                    <p ng-if ="results.chamber === 'senate'">Chamber: Senate</p>
                 </div>
             </div>
         </div>

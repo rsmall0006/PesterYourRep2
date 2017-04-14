@@ -3,6 +3,7 @@
     <properties maven-id="javax.mail:javax.mail-api:1.5.6" />
     <CLASSES>
       <root url="jar://$MAVEN_REPOSITORY$/javax/mail/javax.mail-api/1.5.6/javax.mail-api-1.5.6.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/javax/mail/javax.mail-api/1.5.6/javax.mail-api-1.5.6.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

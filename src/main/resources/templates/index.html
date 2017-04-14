@@ -3,17 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js">
-        <script>
-        $(document).ready(function(){
-        $('Name').find('p:contains("R")').css('background-color','red');
-        $('Name').find('p:contains("D")').css('background-color','blue');
-        $('Name').find('p:contains("I")').css('background-color','green');
-        });
-    </script>
+    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js">-->
+
+
 </head>
 <body ng-app="congress">
 <div ng-controller="representative">
@@ -34,10 +30,15 @@
                 <h3>{{results.first_name + " " + results.last_name}}</h3>
                 <p>{{"State:" + " " + results.state_name}}</p>
                 <p ng-if ="results.website === null">No Website Available</p>
-                <p ng-if = "results.website !== null">{{"Website:" + " " + results.website}}</p>
+                <!--<p ng-if = "results.website !== null">{{"Website:" + " " + results.website}}</p>-->
+                <p ng-if = "results.website !== null">Go to <a ng-href="{{results.website}}" target="_blank">{{results.website}}</a> for their website</p>
+                <!--<div ng-init = "myVar = results.website">-->
+                <!--<p>Go to <a ng-href="{{results.website}}">{{results.website}}</a> for their website</p>-->
+                <!--</div>-->
                 <!--<p>{{"Website:" + " " + results.website}}</p>-->
                 <p ng-if ="results.oc_email === null">No Email Available</p>
-                <p ng-if = "results.oc_email !== null">{{"Email:" + " " + results.oc_email}}</p>
+                <!--<p ng-if = "results.oc_email !== null">{{"Email:" + " " + results.oc_email}}</p>-->
+                <p ng-if = "results.oc_email !== null">Click <a ng-href="mailto:{{results.oc_email}}">{{results.oc_email}}</a> to email them directly.</p>
                 <!--<p>{{"Email:" + " " + results.oc_email}}</p>-->
                 <p>{{"Phone:" + " " + results.phone}}</p>
                 <!--<p>{{"Political Party:" + " " + results.party}}</p>-->

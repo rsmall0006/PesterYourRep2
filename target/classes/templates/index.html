@@ -8,13 +8,25 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js">-->
+    <style>
+.redtext {
+        color: red;
+        }
 
+.bluetext {
+        color: blue;
+        }
+
+.greentext {
+        color: green;
+        }
+</style>
 
 </head>
 <body ng-app="congress">
 <div ng-controller="representative">
-    Enter Zip Code of Representatives <input type="text" ng-model="userZip">
-    <button ng-click="updateReps()">Find Rep</button>
+    Enter Zip Code of Representatives and click Find Rep <input type="text" ng-model="userZip">
+    <button ng-click="updateReps()">Find Rep <img src="public/images/congress.png" width="20px" height="20px" alt="Political Party"></button>
     <!--<button ng-click="getLocation()">Find Your Location</button>-->
     <!--<script src="https://d3js.org/d3.v4.js"></script>-->
     <!--<script>-->
@@ -26,9 +38,11 @@
                 <img ng-src="public/images2/{{results.bioguide_id}}.jpg"/>
 
                 <p class="caption">
+
                     <!--<h3>{{"Name:" + " " + results.first_name + " " + results.last_name}}</h3>-->
                 <h3>{{results.first_name + " " + results.last_name}}</h3>
-                <p>{{"State:" + " " + results.state_name}}</p>
+                <p>{{"State:" + " " + results.state_name}} <img src="public/images3/{{results.state_name}}.png" width="20px" height="20px" alt="Political Party"></p>
+
                 <p ng-if ="results.website === null">No Website Available</p>
                 <!--<p ng-if = "results.website !== null">{{"Website:" + " " + results.website}}</p>-->
                 <p ng-if = "results.website !== null">Go to <a ng-href="{{results.website}}" target="_blank">{{results.website}}</a> for their website</p>
@@ -36,19 +50,34 @@
                 <!--<p>Go to <a ng-href="{{results.website}}">{{results.website}}</a> for their website</p>-->
                 <!--</div>-->
                 <!--<p>{{"Website:" + " " + results.website}}</p>-->
+
+                <p ng-if ="results.facebook_id === null">No Facebook Available</p>
+                <p ng-if = "results.facebook_id !== null">Go to <a ng-href="http://www.facebook.com/{{results.facebook_id}}" target="_blank">www.facebook.com/{{results.facebook_id}}</a> for their Facebook</p>
+
+                <p ng-if ="results.facebook_id === null">No Twitter Available</p>
+                <p ng-if = "results.facebook_id !== null">Go to <a ng-href="http://www.twitter.com/{{results.twitter_id}}" target="_blank">www.twitter.com/{{results.twitter_id}}</a> for their Twitter</p>
+
                 <p ng-if ="results.oc_email === null">No Email Available</p>
                 <!--<p ng-if = "results.oc_email !== null">{{"Email:" + " " + results.oc_email}}</p>-->
-                <p ng-if = "results.oc_email !== null">Click <a ng-href="mailto:{{results.oc_email}}">{{results.oc_email}}</a> to email them directly.</p>
+                <p ng-if = "results.oc_email !== null">Click <a ng-href="mailto:{{results.oc_email}}">{{results.oc_email}}</a> to email them directly</p>
                 <!--<p>{{"Email:" + " " + results.oc_email}}</p>-->
+
+                <p ng-if ="results.contact_form === null">No Website Contact Form Available</p>
+                <p ng-if = "results.contact_form !== null">Go to <a ng-href="{{results.contact_form}}" target="_blank">{{results.contact_form}}</a> for their Website Contact Form</p>
+
                 <p>{{"Phone:" + " " + results.phone}}</p>
+
                 <!--<p>{{"Political Party:" + " " + results.party}}</p>-->
-                <p ng-if ="results.party === 'D'">Political Party: Democrat</p>
-                <p ng-if="results.party === 'R'">Political Party: Republican</p>
-                <p ng-if="results.party === 'I'">Political Party: Independent</p>
+                <p class= "bluetext" ng-if ="results.party === 'D'">Political Party: Democrat <img src="public/images/{{results.party}}.png" width="20px" height="20px" alt="Political Party"></p>
+                <p class="redtext" ng-if="results.party === 'R'">Political Party: Republican <img src="public/images/{{results.party}}.png" width="20px" height="20px" alt="Political Party"></p>
+                <p class= "greentext" ng-if="results.party === 'I'">Political Party: Independent <img src="public/images/{{results.party}}.png" width="20px" height="20px" alt="Political Party"></p>
                 <!--<p>{{"Political Party:" + " " + results.party === 'D' && '{{results.party}}emocrat' || results.party === 'R' && '{{results.party}}epublican' || results.party === 'I' && '{{results.party}}ndependent' }}</p>-->
+
                 <!--<p>{{"Chamber:" + " " + results.chamber}}</p>-->
-                <p ng-if ="results.chamber === 'house'">Chamber: House of Representatives</p>
-                <p ng-if ="results.chamber === 'senate'">Chamber: Senate</p>
+                <p ng-if ="results.chamber === 'house'">Chamber: House of Representatives <img src="public/images/{{results.chamber}}.png" width="20px" height="20px" alt="House of Representatives"></p>
+                <p ng-if ="results.chamber === 'senate'">Chamber: Senate <img src="public/images/{{results.chamber}}.png" width="30px" height="20px" alt="Senate"></p>
+
+                <p>{{"Office Location:" + " " + results.office}}</p>
             </div>
         </div>
     </div>
@@ -59,7 +88,7 @@
     var app = angular.module("congress", []);
     app.controller("representative",["$scope", "$http", function($scope, $http){
         $scope.userZip= ""
-        $http.get("https://congress.api.sunlightfoundation.com/legislators")
+        $http.get("https://congress.api.sunlightfoundation.com/legislators/locate?zip=00000")
         .then(function(response){
             $scope.representatives = response;
         });

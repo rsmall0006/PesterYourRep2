@@ -1,6 +1,6 @@
 package com.example;
 
-import com.example.entities.CongressMessages;
+import com.example.entities.CongressMessage;
 import com.example.repositories.MessageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,14 +25,14 @@ public class MessageController {
 
     @RequestMapping(path = "/to-Representative", method = RequestMethod.GET) //this path should be
     public String messageHome(Model model) {
-            List<CongressMessages> messageList = (ArrayList) messages.findAll();
+            List<CongressMessage> messageList = (ArrayList) messages.findAll();
             model.addAttribute("messages", messageList);
             return "messageList.html"; //need to tell Ross to make a messageList.html
     }
 
     @RequestMapping(path = "/add-message", method = RequestMethod.POST)
     public String addMessage(String subject, String messageText) {
-            CongressMessages message = new CongressMessages();
+            CongressMessage message = new CongressMessage();
             messages.save(message);
             return "redirect:/";
     }

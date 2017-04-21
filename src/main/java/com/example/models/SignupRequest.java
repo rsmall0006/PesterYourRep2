@@ -5,6 +5,15 @@ package com.example.models;
  */
 public class SignupRequest {
 
+
+    private String firstName;
+
+    private String lastName;
+
+    private String emailAddress;
+
+
+
     public String getFirstName() {
         return firstName;
     }
@@ -28,11 +37,5 @@ public class SignupRequest {
     public void setEmailAddress(String emailAddress) {
         this.emailAddress = emailAddress;
     }
-
-    private String firstName;
-
-    private String lastName;
-
-    private String emailAddress;
 
 }

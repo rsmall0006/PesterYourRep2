@@ -1,8 +1,9 @@
-package com.example.repositories;
+package com.example.models;
 
 /**
  * Created by Eric on 4/13/17.
  */
+
 public class Email {
 
     String recipient;

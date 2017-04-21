@@ -1,8 +1,12 @@
 package com.example.entities;
 
 import lombok.Data;
+import lombok.experimental.Tolerate;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.util.UUID;
 
 /**
@@ -10,8 +14,14 @@ import java.util.UUID;
  */
 @Entity
 @Data
-@Table(name = "users")
+@Table(name = "USERS")
 public class User {
+
+    @Id
+    private UUID userKey;
+
+    @Column
+    private String emailAddress;
 
     @Column
     private String firstName;
@@ -20,23 +30,16 @@ public class User {
     private String lastName;
 
     @Column
-    private String emailAddress;
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private UUID userKey;
-
-    @Column
     private boolean emailVerified;
 
-    public User(String firstName, String lastName, String emailAddress, UUID userKey, boolean emailVerified) {
+   @Tolerate
+    public User(UUID userKey, String emailAddress, String firstName, String lastName) {
+        this.userKey = userKey;
+        this.emailAddress = emailAddress;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.emailAddress = emailAddress;
-        this.userKey = userKey;
-        this.emailVerified = emailVerified;
-    }
 
+    }
 }
 
 

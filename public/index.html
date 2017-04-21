@@ -20,13 +20,42 @@
 .greentext {
         color: green;
         }
+
+#nav {
+background: SkyBlue;
+
+
+}
+
 </style>
 
 </head>
-<body ng-app="congress">
+
+
+
+<div ng-app="congress">
+
 <div ng-controller="representative">
-    Enter Zip Code of Representatives and click Find Rep <input type="text" ng-model="userZip">
+    <nav class="navbar navbar-default" id="nav">
+
+        <div class="container-fluid h4">
+            Enter Zip Code of Representatives and click Find Rep <input type="text" ng-model="userZip">
     <button ng-click="updateReps()">Find Rep <img src="images/congress.png" width="20px" height="20px" alt="Political Party"></button>
+            <form align="right" action="/logout" method="post">
+                <button type="submit">Logout</button>
+            </form>
+        </div>
+    </nav>
+
+    <!--<form align="right" action="/logout" method="post">-->
+        <!--<button type="submit">Logout</button>-->
+    <!--</form>-->
+
+    <!--<form action="/logout" method="post">-->
+        <!--<button type="submit">Logout</button>-->
+    <!--</form>-->
+
+
     <!--<button ng-click="getLocation()">Find Your Location</button>-->
     <!--<script src="https://d3js.org/d3.v4.js"></script>-->
     <!--<script>-->
@@ -104,5 +133,92 @@
         }
     }]);
 </script>
+
+
+
+<!--<div class="container">-->
+    <!--<a href="login.html" class="btn btn-sm btn-primary btn-block" role="button">-->
+        <!--Click to go to the Trending Topics page</a>-->
+<!--</div>-->
+
+<!--<div class="container">-->
+    <!--<div class="col-lg-12">-->
+        <!--<h2>Message Your Reps!</h2>-->
+        <!--<p>Below is a message box to allow you to send a message to all 3 of your Representatives</p>-->
+        <!--<form action="" method="POST" enctype="multipart/form-data" id="form_id">-->
+            <!--<div class="form-group">-->
+                <!--<h5><label for="inputName">Name</label></h5>-->
+
+                <!--<input type="text" name="career[name]" class="form-control" id="inputName" tabindex="1" placeholder="Enter your name" pattern="[a-zA-Z. ]{1,50}" required>-->
+            <!--</div>-->
+
+            <!--<div class="form-group">-->
+                <!--<h5><label for="inputEmail">Email</label></h5>-->
+
+                <!--<input type="email" name="career[email]" class="form-control" id="inputEmail" tabindex="2" placeholder="Enter your email address" required>-->
+            <!--</div>-->
+
+            <!--<div class="form-group">-->
+                <!--<h5><label for="inputSubject">Subject</label></h5>-->
+
+                <!--<input type="text" name="career[mobile]" class="form-control" id="inputSubject" tabindex="3" placeholder="Enter your message subject" required>-->
+            <!--</div>-->
+
+            <!--&lt;!&ndash;<div class="form-group">&ndash;&gt;-->
+                <!--&lt;!&ndash;<h5><label for="inputMessage">Message</label></h5>&ndash;&gt;-->
+
+                <!--&lt;!&ndash;<input type="text" name="career[message]" class="form-control" id="inputMessage" tabindex="4" placeholder="Write your details" required>&ndash;&gt;-->
+            <!--&lt;!&ndash;</div>&ndash;&gt;-->
+
+            <!--<div class="form-group">-->
+                <!--<h5><label for="inputMessage">Message</label></h5>-->
+
+                <!--<textarea type="text" name="career[message]" class="form-control" id="inputMessage" tabindex="4" placeholder="Write your message here" required></textarea>-->
+            <!--</div>-->
+
+            <!--<button type="submit" name="submit" class="btn btn-primary btn-block" tabindex="5">Submit</button>-->
+        <!--</form>-->
+    <!--</div>-->
+<!--</div>-->
+
+<!--<div class="container">-->
+    <!--<h2>Form control: input</h2>-->
+    <!--<p>The form below contains two input elements; one of type text and one of type password:</p>-->
+    <!--<form>-->
+        <!--<div class="form-group">-->
+            <!--<label for="usr">Name:</label>-->
+            <!--<input type="text" class="form-control" id="usr">-->
+        <!--</div>-->
+        <!--<div class="form-group">-->
+            <!--<label for="pwd">Password:</label>-->
+            <!--<input type="password" class="form-control" id="pwd">-->
+        <!--</div>-->
+    <!--</form>-->
+<!--</div>-->
+
+<div class="container">
+    <h2>Message Your Reps!</h2>
+    <p>Below is a message box to allow you to send a message to all 3 of your Representatives</p>
+    <form>
+        <div class="form-group">
+            <label for="subject">Subject:</label>
+            <input type="text" class="form-control" id="subject">
+        </div>
+        <div class="form-group">
+            <label for="message">Message</label>
+            <textarea name="something[message]" class="form-control" id="message" placeholder="Write your message here" required></textarea>
+        </div>
+        <button type="submit" name="submit" class="btn btn-primary btn-block" tabindex="5">Submit</button>
+    </form>
+</div>
+
+<!--<div class="container">-->
+<!--<a href="login.html" class="btn btn-sm btn-primary btn-block" role="button">-->
+    <!--Click to go to the Trending Topics page</a>-->
+<!--</div>-->
+
+<!--<form align="center" action="/logout" method="post">-->
+    <!--<button type="submit">Logout</button>-->
+<!--</form>-->
 </body>
 </html>

@@ -24,6 +24,9 @@ public class User {
     private String emailAddress;
 
     @Column
+    private String password;
+
+    @Column
     private String firstName;
 
     @Column
@@ -33,9 +36,10 @@ public class User {
     private boolean emailVerified;
 
    @Tolerate
-    public User(UUID userKey, String emailAddress, String firstName, String lastName) {
+    public User(UUID userKey, String emailAddress, String password, String firstName, String lastName) {
         this.userKey = userKey;
         this.emailAddress = emailAddress;
+        this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
 

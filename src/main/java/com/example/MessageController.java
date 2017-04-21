@@ -27,7 +27,7 @@ public class MessageController {
     public String messageHome(Model model) {
             List<CongressMessage> messageList = (ArrayList) messages.findAll();
             model.addAttribute("messages", messageList);
-            return "messageList.html"; //need to tell Ross to make a messageList.html
+            return "trendingtopics.html"; //need to tell Ross to make a messageList.html
     }
 
     @RequestMapping(path = "/add-message", method = RequestMethod.POST)

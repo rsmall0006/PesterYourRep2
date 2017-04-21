@@ -11,4 +11,6 @@ import java.util.UUID;
 
 public interface UserRepository extends CrudRepository<User, UUID> {
 
+    User findFirstByEmailAddressAndPassword(String emailAddress, String password);
+
 }

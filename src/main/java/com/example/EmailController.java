@@ -1,16 +1,25 @@
 package com.example;
 
+import com.example.entities.CongressMessage;
 import com.example.entities.User;
 import com.example.models.Email;
 import com.example.models.SignupRequest;
 import com.example.repositories.UserRepository;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.inject.Inject;
 import javax.mail.MessagingException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.UUID;
 
 @Slf4j
@@ -20,6 +29,12 @@ public class EmailController {
     private final EmailSender sender;
 
     private final UserRepository userRepository;
+
+    ArrayList<CongressMessage> messagelist = new ArrayList<CongressMessage>();
+
+
+    @Autowired
+    private UserRepository users;
 
     @Inject
     public EmailController(EmailSender sender, UserRepository userRepository) {
@@ -31,17 +46,34 @@ public class EmailController {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
+  *
     @RequestMapping(path = "/", method = RequestMethod.GET)
-    public String login(String firstName, String lastName, String emailAddress) {
-
-
+        public String splashPage(Model model, HttpSession session) {
+        model.addAttribute() //what attribute should I add here to the splash page?
         return "login.html";
 
     }
 
-    @RequestMapping(path = "/signup", method = RequestMethod.POST)
-    public String signup(SignupRequest request) {
+    @RequestMapping(path = "/login", method = RequestMethod.POST)
+    public String login(HttpSession session, String emailAddress, String password, boolean emailVerified) {
+
+        if(userRepository.findFirstByEmailAddressAndPassword(emailAddress, password, emailVerified))
+
+    }
+
+
+    @RequestMapping(value="/logout")
+    public String logout(HttpServletRequest request, HttpServletResponse response) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth != null){
+            new SecurityContextLogoutHandler().logout(request, response, auth);
+        }
+        request.setAttribute("logout","logout");
+        return "login";
+    }
+
+    @RequestMapping(path = "/signUp", method = RequestMethod.POST)
+    public String signUp(SignupRequest request) {
 
         final UUID userKey = UUID.nameUUIDFromBytes(request.getEmailAddress().getBytes());
 
@@ -66,4 +98,18 @@ public class EmailController {
 
         return "redirect:/";
     }
+
+
+//
+//    //connect this to email sender, to the database i guess through our array list which will be displayed on our trendingTopics.html
+//    @RequestMapping(path = "/add-message", method = RequestMethod.POST)
+//    public String addMessage(HttpSession session, long id, String userEmail, String subject, String textBody) {
+//        session.setAttribute(id);
+//        session.setAttribute("userEmail", userEmail);
+//        session.setAttribute("subject", subject);
+//        session.setAttribute("textBody", textBody);
+//        messagelist.add(new CongressMessage(messagelist.size() + 1, CongressMessage)); //
+//        System.out.println(messagelist.size());
+//        return "redirect:/";
+
 }

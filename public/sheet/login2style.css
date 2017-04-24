@@ -2,20 +2,26 @@ body
 {
     background-color: #1b1b1b;
     padding-top: 40px;
+    overflow-y: hidden;
+}
+
+#nav
+{
+padding: 100px;
 }
 
 .form-login {
     max-width: 280px;
-    padding: 15px;
-    margin:130px;
+    padding: 0px;
+    margin:50px;
     margin-top:10px;
   }
 
 .form-signup {
     max-width: 280px;
-    padding: 15px;
-    margin:130px;
-    margin-top:10px;
+    padding: 0px;
+    margin:50px;
+    margin-top:0px;
   }
 
 .input-group-addon
@@ -42,9 +48,9 @@ opacity: 0.8;
     bottom: 0;
     left: 0;
     background-size: cover;
-    background-position: 50% 50%;
+    background-position: 0% 0%;
     background-image: url('../images/PesterLogo12.png');
-    background-repeat:repeat;
+    background-repeat:space;
   }
 
   .form-signup input[type="text"],.form-signup input[type="password"] { border: 1px solid rgb(50, 118, 177); }

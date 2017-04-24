@@ -12,79 +12,102 @@
 .redtext {
         color: red;
         }
-
 .bluetext {
         color: blue;
         }
-
 .greentext {
         color: green;
         }
+#nav {
+background: SkyBlue;
+}
 </style>
 
 </head>
-<body ng-app="congress">
-<div ng-controller="representative">
-    Enter Zip Code of Representatives and click Find Rep <input type="text" ng-model="userZip">
-    <button ng-click="updateReps()">Find Rep <img src="images/congress.png" width="20px" height="20px" alt="Political Party"></button>
-    <!--<button ng-click="getLocation()">Find Your Location</button>-->
-    <!--<script src="https://d3js.org/d3.v4.js"></script>-->
-    <!--<script>-->
-    <!--</script>-->
-    <div ng-repeat="representative in representatives" class="row">
-        <div ng-repeat="results in representative.results" class="col-sm-6 col-md-4" ng-style="'{{results.party}}' === 'R' && {'background-color': 'red'} || '{{results.party}}' === 'D' && {'background-color': 'blue'} || '{{results.party}}' === 'I' && {'background-color': 'green'}" >
-            <div class="thumbnail">
-                <!--<img ng-src="{{results.party == 'D' && 'public/images/DemocraticLogo.png' || results.party == 'R' && 'public/images/Republicanlogo.png' || results.party == 'I' && 'public/images/IndependentLogo.png'}}" width="100" height="50px" alt="Your Congressional Representative"/>-->
-                <img ng-src="images2/{{results.bioguide_id}}.jpg"/>
 
-                <p class="caption">
 
-                    <!--<h3>{{"Name:" + " " + results.first_name + " " + results.last_name}}</h3>-->
-                <h3>{{results.first_name + " " + results.last_name}}</h3>
-                <p>{{"State:" + " " + results.state_name}} <img src="images3/{{results.state_name}}.png" width="20px" height="20px" alt="Political Party"></p>
 
-                <p ng-if ="results.website === null">No Website Available</p>
-                <!--<p ng-if = "results.website !== null">{{"Website:" + " " + results.website}}</p>-->
-                <p ng-if = "results.website !== null">Go to <a ng-href="{{results.website}}" target="_blank">{{results.website}}</a> for their website</p>
-                <!--<div ng-init = "myVar = results.website">-->
-                <!--<p>Go to <a ng-href="{{results.website}}">{{results.website}}</a> for their website</p>-->
-                <!--</div>-->
-                <!--<p>{{"Website:" + " " + results.website}}</p>-->
+<div ng-app="congress">
 
-                <p ng-if ="results.facebook_id === null">No Facebook Available</p>
-                <p ng-if = "results.facebook_id !== null">Go to <a ng-href="http://www.facebook.com/{{results.facebook_id}}" target="_blank">www.facebook.com/{{results.facebook_id}}</a> for their Facebook</p>
+    <div ng-controller="representative">
+        <nav class="navbar navbar-default" id="nav">
 
-                <p ng-if ="results.twitter_id === null">No Twitter Available</p>
-                <p ng-if = "results.twitter_id !== null">Go to <a ng-href="http://www.twitter.com/{{results.twitter_id}}" target="_blank">www.twitter.com/{{results.twitter_id}}</a> for their Twitter</p>
+            <div class="container-fluid h4">
+                Enter Zip Code of Representatives and click Find Rep <input type="text" ng-model="userZip">
+                <button ng-click="updateReps()">Find Rep <img src="images/congress.png" width="20px" height="20px" alt="Political Party"></button>
+                <form align="right" action="/logout" method="post">
+                    <button type="submit">Logout</button>
+                </form>
+            </div>
+        </nav>
 
-                <p ng-if ="results.oc_email === null">No Email Available</p>
-                <!--<p ng-if = "results.oc_email !== null">{{"Email:" + " " + results.oc_email}}</p>-->
-                <p ng-if = "results.oc_email !== null">Click <a ng-href="mailto:{{results.oc_email}}">{{results.oc_email}}</a> to email them directly</p>
-                <!--<p>{{"Email:" + " " + results.oc_email}}</p>-->
+        <!--<form align="right" action="/logout" method="post">-->
+        <!--<button type="submit">Logout</button>-->
+        <!--</form>-->
 
-                <p ng-if ="results.contact_form === null">No Website Contact Form Available</p>
-                <p ng-if = "results.contact_form !== null">Go to <a ng-href="{{results.contact_form}}" target="_blank">{{results.contact_form}}</a> for their Website Contact Form</p>
+        <!--<form action="/logout" method="post">-->
+        <!--<button type="submit">Logout</button>-->
+        <!--</form>-->
 
-                <p ng-if ="results.youtube_id === null">No YouTube Available</p>
-                <p ng-if = "results.youtube_id !== null">Go to <a ng-href="http://www.youtube.com/{{results.youtube_id}}" target="_blank">www.youtube.com/{{results.youtube_id}}</a> for their YouTube</p>
 
-                <p>{{"Phone:" + " " + results.phone}}</p>
+        <!--<button ng-click="getLocation()">Find Your Location</button>-->
+        <!--<script src="https://d3js.org/d3.v4.js"></script>-->
+        <!--<script>-->
+        <!--</script>-->
+        <div ng-repeat="representative in representatives" class="row">
+            <div ng-repeat="results in representative.results" class="col-sm-6 col-md-4" ng-style="'{{results.party}}' === 'R' && {'background-color': 'red'} || '{{results.party}}' === 'D' && {'background-color': 'blue'} || '{{results.party}}' === 'I' && {'background-color': 'green'}" >
+                <div class="thumbnail">
+                    <!--<img ng-src="{{results.party == 'D' && 'public/images/DemocraticLogo.png' || results.party == 'R' && 'public/images/Republicanlogo.png' || results.party == 'I' && 'public/images/IndependentLogo.png'}}" width="100" height="50px" alt="Your Congressional Representative"/>-->
+                    <img ng-src="images2/{{results.bioguide_id}}.jpg"/>
 
-                <!--<p>{{"Political Party:" + " " + results.party}}</p>-->
-                <p class= "bluetext" ng-if ="results.party === 'D'">Political Party: Democrat <img src="images/{{results.party}}.png" width="20px" height="20px" alt="Political Party"></p>
-                <p class="redtext" ng-if="results.party === 'R'">Political Party: Republican <img src="images/{{results.party}}.png" width="20px" height="20px" alt="Political Party"></p>
-                <p class= "greentext" ng-if="results.party === 'I'">Political Party: Independent <img src="images/{{results.party}}.png" width="20px" height="20px" alt="Political Party"></p>
-                <!--<p>{{"Political Party:" + " " + results.party === 'D' && '{{results.party}}emocrat' || results.party === 'R' && '{{results.party}}epublican' || results.party === 'I' && '{{results.party}}ndependent' }}</p>-->
+                    <p class="caption">
 
-                <!--<p>{{"Chamber:" + " " + results.chamber}}</p>-->
-                <p ng-if ="results.chamber === 'house'">Chamber: House of Representatives <img src="images/{{results.chamber}}.png" width="20px" height="20px" alt="House of Representatives"></p>
-                <p ng-if ="results.chamber === 'senate'">Chamber: Senate <img src="images/{{results.chamber}}.png" width="30px" height="20px" alt="Senate"></p>
+                        <!--<h3>{{"Name:" + " " + results.first_name + " " + results.last_name}}</h3>-->
+                    <h3>{{results.first_name + " " + results.last_name}}</h3>
+                    <p>{{"State:" + " " + results.state_name}} <img src="images3/{{results.state_name}}.png" width="20px" height="20px" alt="Political Party"></p>
 
-                <p>{{"Office Location:" + " " + results.office}}</p>
+                    <p ng-if ="results.website === null">No Website Available</p>
+                    <!--<p ng-if = "results.website !== null">{{"Website:" + " " + results.website}}</p>-->
+                    <p ng-if = "results.website !== null">Go to <a ng-href="{{results.website}}" target="_blank">{{results.website}}</a> for their website</p>
+                    <!--<div ng-init = "myVar = results.website">-->
+                    <!--<p>Go to <a ng-href="{{results.website}}">{{results.website}}</a> for their website</p>-->
+                    <!--</div>-->
+                    <!--<p>{{"Website:" + " " + results.website}}</p>-->
+
+                    <p ng-if ="results.facebook_id === null">No Facebook Available</p>
+                    <p ng-if = "results.facebook_id !== null">Go to <a ng-href="http://www.facebook.com/{{results.facebook_id}}" target="_blank">www.facebook.com/{{results.facebook_id}}</a> for their Facebook</p>
+
+                    <p ng-if ="results.twitter_id === null">No Twitter Available</p>
+                    <p ng-if = "results.twitter_id !== null">Go to <a ng-href="http://www.twitter.com/{{results.twitter_id}}" target="_blank">www.twitter.com/{{results.twitter_id}}</a> for their Twitter</p>
+
+                    <p ng-if ="results.oc_email === null">No Email Available</p>
+                    <!--<p ng-if = "results.oc_email !== null">{{"Email:" + " " + results.oc_email}}</p>-->
+                    <p ng-if = "results.oc_email !== null">Click <a ng-href="mailto:{{results.oc_email}}">{{results.oc_email}}</a> to email them directly</p>
+                    <!--<p>{{"Email:" + " " + results.oc_email}}</p>-->
+
+                    <p ng-if ="results.contact_form === null">No Website Contact Form Available</p>
+                    <p ng-if = "results.contact_form !== null">Go to <a ng-href="{{results.contact_form}}" target="_blank">{{results.contact_form}}</a> for their Website Contact Form</p>
+
+                    <p ng-if ="results.youtube_id === null">No YouTube Available</p>
+                    <p ng-if = "results.youtube_id !== null">Go to <a ng-href="http://www.youtube.com/{{results.youtube_id}}" target="_blank">www.youtube.com/{{results.youtube_id}}</a> for their YouTube</p>
+
+                    <p>{{"Phone:" + " " + results.phone}}</p>
+
+                    <!--<p>{{"Political Party:" + " " + results.party}}</p>-->
+                    <p class= "bluetext" ng-if ="results.party === 'D'">Political Party: Democrat <img src="images/{{results.party}}.png" width="20px" height="20px" alt="Political Party"></p>
+                    <p class="redtext" ng-if="results.party === 'R'">Political Party: Republican <img src="images/{{results.party}}.png" width="20px" height="20px" alt="Political Party"></p>
+                    <p class= "greentext" ng-if="results.party === 'I'">Political Party: Independent <img src="images/{{results.party}}.png" width="20px" height="20px" alt="Political Party"></p>
+                    <!--<p>{{"Political Party:" + " " + results.party === 'D' && '{{results.party}}emocrat' || results.party === 'R' && '{{results.party}}epublican' || results.party === 'I' && '{{results.party}}ndependent' }}</p>-->
+
+                    <!--<p>{{"Chamber:" + " " + results.chamber}}</p>-->
+                    <p ng-if ="results.chamber === 'house'">Chamber: House of Representatives <img src="images/{{results.chamber}}.png" width="20px" height="20px" alt="House of Representatives"></p>
+                    <p ng-if ="results.chamber === 'senate'">Chamber: Senate <img src="images/{{results.chamber}}.png" width="30px" height="20px" alt="Senate"></p>
+
+                    <p>{{"Office Location:" + " " + results.office}}</p>
+                </div>
             </div>
         </div>
     </div>
-</div>
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
 <script type="text/javascript">
@@ -104,5 +127,92 @@
         }
     }]);
 </script>
+
+
+
+<!--<div class="container">-->
+<!--<a href="login.html" class="btn btn-sm btn-primary btn-block" role="button">-->
+<!--Click to go to the Trending Topics page</a>-->
+<!--</div>-->
+
+<!--<div class="container">-->
+<!--<div class="col-lg-12">-->
+<!--<h2>Message Your Reps!</h2>-->
+<!--<p>Below is a message box to allow you to send a message to all 3 of your Representatives</p>-->
+<!--<form action="" method="POST" enctype="multipart/form-data" id="form_id">-->
+<!--<div class="form-group">-->
+<!--<h5><label for="inputName">Name</label></h5>-->
+
+<!--<input type="text" name="career[name]" class="form-control" id="inputName" tabindex="1" placeholder="Enter your name" pattern="[a-zA-Z. ]{1,50}" required>-->
+<!--</div>-->
+
+<!--<div class="form-group">-->
+<!--<h5><label for="inputEmail">Email</label></h5>-->
+
+<!--<input type="email" name="career[email]" class="form-control" id="inputEmail" tabindex="2" placeholder="Enter your email address" required>-->
+<!--</div>-->
+
+<!--<div class="form-group">-->
+<!--<h5><label for="inputSubject">Subject</label></h5>-->
+
+<!--<input type="text" name="career[mobile]" class="form-control" id="inputSubject" tabindex="3" placeholder="Enter your message subject" required>-->
+<!--</div>-->
+
+<!--&lt;!&ndash;<div class="form-group">&ndash;&gt;-->
+<!--&lt;!&ndash;<h5><label for="inputMessage">Message</label></h5>&ndash;&gt;-->
+
+<!--&lt;!&ndash;<input type="text" name="career[message]" class="form-control" id="inputMessage" tabindex="4" placeholder="Write your details" required>&ndash;&gt;-->
+<!--&lt;!&ndash;</div>&ndash;&gt;-->
+
+<!--<div class="form-group">-->
+<!--<h5><label for="inputMessage">Message</label></h5>-->
+
+<!--<textarea type="text" name="career[message]" class="form-control" id="inputMessage" tabindex="4" placeholder="Write your message here" required></textarea>-->
+<!--</div>-->
+
+<!--<button type="submit" name="submit" class="btn btn-primary btn-block" tabindex="5">Submit</button>-->
+<!--</form>-->
+<!--</div>-->
+<!--</div>-->
+
+<!--<div class="container">-->
+<!--<h2>Form control: input</h2>-->
+<!--<p>The form below contains two input elements; one of type text and one of type password:</p>-->
+<!--<form>-->
+<!--<div class="form-group">-->
+<!--<label for="usr">Name:</label>-->
+<!--<input type="text" class="form-control" id="usr">-->
+<!--</div>-->
+<!--<div class="form-group">-->
+<!--<label for="pwd">Password:</label>-->
+<!--<input type="password" class="form-control" id="pwd">-->
+<!--</div>-->
+<!--</form>-->
+<!--</div>-->
+
+<div class="container">
+    <h2>Message Your Reps!</h2>
+    <p>Below is a message box to allow you to send a message to all 3 of your Representatives</p>
+    <form>
+        <div class="form-group">
+            <label for="subject">Subject:</label>
+            <input type="text" class="form-control" id="subject">
+        </div>
+        <div class="form-group">
+            <label for="message">Message</label>
+            <textarea name="something[message]" class="form-control" id="message" placeholder="Write your message here" required></textarea>
+        </div>
+        <button type="submit" name="submit" class="btn btn-primary btn-block" tabindex="5">Submit</button>
+    </form>
+</div>
+
+<!--<div class="container">-->
+<!--<a href="login.html" class="btn btn-sm btn-primary btn-block" role="button">-->
+<!--Click to go to the Trending Topics page</a>-->
+<!--</div>-->
+
+<!--<form align="center" action="/logout" method="post">-->
+<!--<button type="submit">Logout</button>-->
+<!--</form>-->
 </body>
 </html>

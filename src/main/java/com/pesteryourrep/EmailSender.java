@@ -1,7 +1,7 @@
-package com.example;
+package com.pesteryourrep;
 
-import com.example.entities.User;
-import com.example.models.Email;
+import com.pesteryourrep.entities.User;
+import com.pesteryourrep.models.Email;
 import com.google.common.io.Resources;
 import org.springframework.stereotype.Component;
 

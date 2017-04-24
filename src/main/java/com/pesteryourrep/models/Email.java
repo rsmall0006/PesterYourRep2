@@ -1,4 +1,4 @@
-package com.example.models;
+package com.pesteryourrep.models;
 
 /**
  * Created by Eric on 4/13/17.

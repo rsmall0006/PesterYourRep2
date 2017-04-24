@@ -1,8 +1,12 @@
-package com.example.models;
+package com.pesteryourrep.models;
+
+import lombok.Data;
 
 /**
  * Created by Eric on 4/12/17.
  */
+
+@Data
 public class SignupRequest {
 
 
@@ -12,30 +16,7 @@ public class SignupRequest {
 
     private String emailAddress;
 
+    private String password;
 
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getEmailAddress() {
-        return emailAddress;
-    }
-
-    public void setEmailAddress(String emailAddress) {
-        this.emailAddress = emailAddress;
-    }
 
 }

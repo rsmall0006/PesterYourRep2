@@ -1,6 +1,6 @@
-package com.example.repositories;
+package com.pesteryourrep.repositories;
 
-import com.example.entities.User;
+import com.pesteryourrep.entities.User;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.UUID;
@@ -11,6 +11,6 @@ import java.util.UUID;
 
 public interface UserRepository extends CrudRepository<User, UUID> {
 
-    User findFirstByEmailAddressAndPassword(String emailAddress, String password);
+    User findByEmailAddress(String emailAddress);
 
 }

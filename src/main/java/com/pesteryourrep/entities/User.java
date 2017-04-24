@@ -1,4 +1,4 @@
-package com.example.entities;
+package com.pesteryourrep.entities;
 
 import lombok.Data;
 import lombok.experimental.Tolerate;

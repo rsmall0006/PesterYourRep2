@@ -1,7 +1,7 @@
-package com.example;
+package com.pesteryourrep;
 
-import com.example.entities.CongressMessage;
-import com.example.repositories.MessageRepository;
+import com.pesteryourrep.entities.CongressMessage;
+import com.pesteryourrep.repositories.MessageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

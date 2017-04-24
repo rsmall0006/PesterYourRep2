@@ -1,14 +1,14 @@
-package com.example;
+package com.pesteryourrep;
 
-import com.example.entities.CongressMessage;
-import com.example.entities.User;
-import com.example.models.Email;
-import com.example.models.SignupRequest;
-import com.example.repositories.UserRepository;
+import com.pesteryourrep.entities.CongressMessage;
+import com.pesteryourrep.entities.User;
+import com.pesteryourrep.models.Email;
+import com.pesteryourrep.models.SignupRequest;
+import com.pesteryourrep.repositories.UserRepository;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,45 +31,52 @@ public class EmailController {
 
     private final UserRepository userRepository;
 
+    private final PasswordEncoder encoder;
+
+
     ArrayList<CongressMessage> messagelist = new ArrayList<CongressMessage>();
 
 
-    @Autowired
-    private UserRepository users;
-
     @Inject
-    public EmailController(EmailSender sender, UserRepository userRepository) {
+    public EmailController(EmailSender sender, UserRepository userRepository, PasswordEncoder encoder) {
         this.sender = sender;
         this.userRepository = userRepository;
-
+        this.encoder = encoder;
     }
+
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
     @RequestMapping(path = "/", method = RequestMethod.GET)
-        public String splashPage(Model model, HttpSession session) {
-        model.addAttribute() //what attribute should I add here to the splash page?
-        return "login.html";
+    public String splashPage(Model model, HttpSession session) {
+        // model.addAttribute() //what attribute should I add here to the splash page?
+        return "";
 
     }
 
     @RequestMapping(path = "/login", method = RequestMethod.POST)
-    public String login(HttpSession session, String emailAddress, String password, boolean emailVerified) {
+    public String login(HttpSession session, String emailAddress, String password) {
 
-        if(userRepository.findFirstByEmailAddressAndPassword(emailAddress, password, emailVerified))
+        User byEmailAddress = userRepository.findByEmailAddress(emailAddress);
+        if (byEmailAddress == null) {
+            return ""; //this is a placeholder and we will have to return something for an error condition if the user doesnt exist (not valid)
+        } if (encoder.matches(password, byEmailAddress.getPassword())) {
+            return "true";  //must implement this
+        }
+            //google for spring session examples for token
 
+        return "redirect:/index.html";
     }
 
-
-    @RequestMapping(value="/logout")
+    @RequestMapping(value = "/logout")  //invalidate the session
     public String logout(HttpServletRequest request, HttpServletResponse response) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        if (auth != null){
+        if (auth != null) {
             new SecurityContextLogoutHandler().logout(request, response, auth);
         }
-        request.setAttribute("logout","logout");
+        request.setAttribute("logout", "logout");
         return "login";
     }
 
@@ -77,6 +84,7 @@ public class EmailController {
     public String signUp(SignupRequest request) {
 
         final UUID userKey = UUID.nameUUIDFromBytes(request.getEmailAddress().getBytes());
+
 
         if (userRepository.exists(userKey)) {
             return "email already in use";
@@ -87,6 +95,11 @@ public class EmailController {
         user.setEmailAddress(request.getEmailAddress());
         user.setFirstName(request.getFirstName());
         user.setLastName(request.getLastName());
+
+        String hashedpassword = encoder.encode(request.getPassword());
+
+        user.setPassword(hashedpassword);
+
         userRepository.save(user);
 
         Email email = sender.createEmail(user);
@@ -99,18 +112,5 @@ public class EmailController {
 
         return "redirect:/";
     }
-
-
-//
-//    //connect this to email sender, to the database i guess through our array list which will be displayed on our trendingTopics.html
-//    @RequestMapping(path = "/add-message", method = RequestMethod.POST)
-//    public String addMessage(HttpSession session, long id, String userEmail, String subject, String textBody) {
-//        session.setAttribute(id);
-//        session.setAttribute("userEmail", userEmail);
-//        session.setAttribute("subject", subject);
-//        session.setAttribute("textBody", textBody);
-//        messagelist.add(new CongressMessage(messagelist.size() + 1, CongressMessage)); //
-//        System.out.println(messagelist.size());
-//        return "redirect:/";
 
 }
